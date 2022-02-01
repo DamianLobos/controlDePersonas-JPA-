@@ -12,29 +12,41 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "persona", catalog = "test2", schema = "")
+@Table(name = "persona", catalog = "personas", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")})
+    @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p"),
+    @NamedQuery(name = "Persona.findByIdpersona", query = "SELECT p FROM Persona p WHERE p.idpersona = :idpersona"),
+    @NamedQuery(name = "Persona.findByNombre", query = "SELECT p FROM Persona p WHERE p.nombre = :nombre"),
+    @NamedQuery(name = "Persona.findByApellido", query = "SELECT p FROM Persona p WHERE p.apellido = :apellido"),
+    @NamedQuery(name = "Persona.findByDni", query = "SELECT p FROM Persona p WHERE p.dni = :dni"),
+    @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono"),
+    @NamedQuery(name = "Persona.findByDireccion", query = "SELECT p FROM Persona p WHERE p.direccion = :direccion")})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idPersona", nullable = false)
-    private Integer idPersona;
-    @Column(name = "Nombre", length = 45)
+    @Column(name = "idpersona", nullable = false)
+    private Integer idpersona;
+    @Column(name = "nombre", length = 45)
     private String nombre;
-    @Column(name = "Apellido", length = 45)
+    @Column(name = "apellido", length = 45)
     private String apellido;
-    @Column(name = "Edad")
-    private Integer edad;
+    @Column(name = "dni", length = 45)
+    private String dni;
+    @Column(name = "telefono", length = 45)
+    private String telefono;
+    @Column(name = "direccion", length = 100)
+    private String direccion;
 
-    public Persona(Integer idPersona, String nombre, String apellido, Integer edad) {
-        this.idPersona = idPersona;
+    public Persona(Integer idpersona, String nombre, String apellido, String dni, String telefono, String direccion) {
+        this.idpersona = idpersona;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.edad = edad;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.direccion = direccion;
     }
     
     
@@ -42,16 +54,16 @@ public class Persona implements Serializable {
     public Persona() {
     }
 
-    public Persona(Integer idPersona) {
-        this.idPersona = idPersona;
+    public Persona(Integer idpersona) {
+        this.idpersona = idpersona;
     }
 
-    public Integer getIdPersona() {
-        return idPersona;
+    public Integer getIdpersona() {
+        return idpersona;
     }
 
-    public void setIdPersona(Integer idPersona) {
-        this.idPersona = idPersona;
+    public void setIdpersona(Integer idpersona) {
+        this.idpersona = idpersona;
     }
 
     public String getNombre() {
@@ -70,18 +82,34 @@ public class Persona implements Serializable {
         this.apellido = apellido;
     }
 
-    public Integer getEdad() {
-        return edad;
+    public String getDni() {
+        return dni;
     }
 
-    public void setEdad(Integer edad) {
-        this.edad = edad;
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idPersona != null ? idPersona.hashCode() : 0);
+        hash += (idpersona != null ? idpersona.hashCode() : 0);
         return hash;
     }
 
@@ -92,7 +120,7 @@ public class Persona implements Serializable {
             return false;
         }
         Persona other = (Persona) object;
-        if ((this.idPersona == null && other.idPersona != null) || (this.idPersona != null && !this.idPersona.equals(other.idPersona))) {
+        if ((this.idpersona == null && other.idpersona != null) || (this.idpersona != null && !this.idpersona.equals(other.idpersona))) {
             return false;
         }
         return true;
@@ -100,8 +128,9 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Persona{" + "idPersona=" + idPersona + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + '}';
+        return "Persona{" + "idpersona=" + idpersona + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", direccion=" + direccion + '}';
     }
 
-  
+   
+    
 }
